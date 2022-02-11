@@ -1,0 +1,10 @@
+$max-width: 1200;
+@function responsive-size($size) {
+  @return ($size / ($max-width / 100));
+}
+@mixin responsive($attribute, $size) {
+  #{$attribute}: #{responsive-size($size)}vw;
+  @media (min-width: #{$max-width}px) {
+    #{$attribute}: #{$size}px;
+  }
+}

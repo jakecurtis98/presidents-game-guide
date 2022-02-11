@@ -1,0 +1,209 @@
+@import 'Variables';
+@import 'Functions';
+
+.container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  .holder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 100vw;
+    height: 100vh;
+    @include responsive('max-height', 900);
+    @include responsive('max-width', 1225);
+    @include responsive('padding', 25);
+    margin: auto;
+
+    .VisualAreaContainer {
+      flex-grow: 1;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      transition: opacity .25s;
+
+      .explanationContainer {
+        width: 100%;
+        @include responsive('height', 70);
+        //@include responsive('margin-bottom', 50);
+        h2 {
+          text-align: center;
+          margin: 0;
+          @include responsive('font-size', 25);
+        }
+      }
+      .CardsContainer {
+        height: 90%;
+
+        .suitImage {
+          @include responsive('width', 100);
+        }
+      }
+    }
+
+    .BottomArea {
+      min-height: 20%;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+
+    .ExplanationAreaContainer {
+        width: calc(80% - #{responsive-size(20)}vw);
+        margin-right: #{responsive-size(20)}vw;
+        @media (min-width: #{$max-width}px) {
+          width: calc(80% - 20px);
+          margin-right: 20px;
+        }
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+
+        .SpeechBubbleContainer {
+          flex-grow: 1;
+          position: relative;
+          background: $speachBubbleBG;
+          color: $speachBubbleText;
+          border-radius: .4em;
+          @include responsive('padding', 20);
+
+          &:after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 50%;
+            width: 0;
+            height: 0;
+            border: #{responsive-size(20)}vw solid transparent;
+            @media (min-width: #{$max-width}px) {
+              border: 20px solid transparent;
+              border-left-color: $speachBubbleBG;
+              border-right: 0;
+              border-bottom: 0;
+            }
+            border-left-color: $speachBubbleBG;
+            border-right: 0;
+            border-bottom: 0;
+
+            @include responsive('margin-top', -10);
+            @include responsive('margin-right', -20);
+          }
+
+          p {
+            @include responsive('font-size', 20);
+          }
+        }
+
+        .buttonsContainer {
+          width: 100%;
+          display: flex;
+          justify-content: space-between;
+          padding: #{responsive-size(20)}vw 0;
+          @media (min-width: #{$max-width}px) {
+            padding: 20px 0;
+          }
+        }
+      }
+
+      .PersonContainer {
+        width: 18%;
+        img {
+          max-width: 100%;
+          @include responsive('width', 216);
+        }
+      }
+    }
+  }
+}
+
+.btn {
+  @include responsive('padding', 10);
+  background-color: $btnBG;
+  border: 1px solid $btnBG;
+  color: $btnText;
+  border-radius: 10px;
+  width: 30%;
+  text-align: center;
+  cursor: pointer;
+  font-weight: bold;
+  @include responsive('font-size', 20);
+
+  &:hover {
+    background-color: $btnHoverBG;
+    color: $btnHoverText;
+  }
+}
+
+
+.cards-holder {
+  display: block;
+
+  &.cards-holder-middle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+
+     .card {
+      transform: rotate(90deg);
+       transition: height .5s, width .5s, flex-basis .5s;
+    }
+  }
+
+  .card {
+    display: inline-block;
+    img {
+      @include responsive('width', 120);
+      max-width: unset;
+    }
+  }
+  &.overlapping {
+    transform: translateX(#{responsive-size(200)}vw);
+    @media (min-width: #{$max-width}px) {
+      transform: translateX(200px);
+    }
+    .card {
+
+      @for $i from 2 through 9 {
+        &:nth-child(#{$i}) {
+          transform: translateX(-#{responsive-size(50 * ($i - 1))}vw);
+          @media (min-width: #{$max-width}px) {
+            transform: translateX(-#{(50 * ($i - 1))}px);
+          }
+        }
+      }
+    }
+  }
+}
+
+.cardTitles {
+  text-align: center;
+  @include responsive('font-size', 20);
+}
+
+.text-center {
+  text-align: center;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  .col-3 {
+    width: calc(24% - #{responsive-size(20)}vw);
+    @media (min-width: #{$max-width}px) {
+      width: calc(24% - 20px);
+    }
+  }
+}
+
+.mt-20 {
+  @include responsive('margin-top', 50);
+}
+
+img {
+  max-width: 100%;
+}
